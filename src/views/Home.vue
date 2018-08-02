@@ -9,13 +9,16 @@
     <h1>People ({{ people.length }} total)</h1>
     <div v-for="x in people">
       <h2 v-on:click="toggleBio(x)">{{ x.name }}</h2>
-      <p v-if="x.bioVisible">{{ x.bio }}</p>
+      <p v-bind:class="{strike: x.bioVisible}">{{ x.bio }}</p>
       <button v-on:click="deletePerson(x)">Delete</button>
     </div>
   </div>
 </template>
 
 <style>
+.strike {
+  text-decoration: line-through;
+}
 </style>
 
 <script>
