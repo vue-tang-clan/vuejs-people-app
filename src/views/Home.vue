@@ -45,8 +45,16 @@ export default {
       inputPerson.bioVisible = !inputPerson.bioVisible;
     },
     addPerson: function() {
-      this.people.push(this.newPerson);
-      this.newPerson = { name: "", bio: "", bioVisible: true };
+      var params = {
+        name: this.newPerson.name,
+        bio: this.newPerson.bio
+      };
+      axios.post("http://localhost:3000/api/people", params).then(
+        function(response) {
+          this.people.push(response.data);
+          this.newPerson = { name: "", bio: "", bioVisible: true };
+        }.bind(this)
+      );
     },
     deletePerson: function(inputPerson) {
       var index = this.people.indexOf(inputPerson);
